@@ -1,8 +1,9 @@
 
 
 ## About YajraApp
-
+<p>
 To configure it in your system follow the below instruction
+</p>
 
 - git clone <code>https://github.com/PrafullaKumarSahu/yajraapp.git</code>
 
@@ -31,9 +32,9 @@ To configure it in your system follow the below instruction
 </code>
 
 - <code>php artisan migrate</code>
-
+<p>
 - Find the providers in <code>config >> app.php</code> file and register the DatatablesServiceProvider
-
+</p>
 <code>
     'providers' => [
         // ...
@@ -41,7 +42,9 @@ To configure it in your system follow the below instruction
     ]
 </code>
 
+<p>
     - Place the aliases in <code>config >></code> app.php file and register the aliases.
+</p>
 	
 <code>
     'aliases' => [
@@ -50,11 +53,14 @@ To configure it in your system follow the below instruction
     ]
 </code>
 
+<p>
 - Open Tinker
+</p>
     - <code>php artisan tinker</code>
 
-	
+<p>
 - Create some fake data
+</p>
 
         - <code>factory(App\User::class, 100)->create();</code>
 		
