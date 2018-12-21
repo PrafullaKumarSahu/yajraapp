@@ -18,10 +18,15 @@ To configure it in your system follow the below instruction
 
 <code>
     DB_CONNECTION=mysql
+	
     DB_HOST=127.0.0.1
+	
     DB_PORT=3306
+	
     DB_DATABASE=laraveldatatables
+	
     DB_USERNAME=root
+	
     DB_PASSWORD=
 </code>
 
@@ -45,11 +50,15 @@ To configure it in your system follow the below instruction
     ]
 </code>
 
+- Open Tinker
     - <code>php artisan tinker</code>
 
 	
-        - <code>factory(App\User::class, 100)->create();</code>
+- Create some fake data
 
+        - <code>factory(App\User::class, 100)->create();</code>
+		
+- Run artisan server
 		
     - <code>php artisan serve</code>
 	
