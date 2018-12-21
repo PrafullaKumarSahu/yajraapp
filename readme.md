@@ -18,6 +18,7 @@ To configure it in your system follow the below instruction
 - Configure .env file
 
 <code>
+
     DB_CONNECTION=mysql
 	
     DB_HOST=127.0.0.1
@@ -29,6 +30,7 @@ To configure it in your system follow the below instruction
     DB_USERNAME=root
 	
     DB_PASSWORD=
+	
 </code>
 
 - <code>php artisan migrate</code>
