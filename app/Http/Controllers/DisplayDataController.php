@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Datatables;
+use Yajra\DataTables\CollectionDataTable;
 use App\User;
+use Illuminate\Support\Str;
 
 class DisplayDataController extends Controller
 {
@@ -13,9 +15,24 @@ class DisplayDataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Datatables::of(User::query())->make(true);
+        $users = User::all();
+        return (new CollectionDataTable($users))
+        ->filter(function ($instance) use ($request) {
+            if ($request->has('name') && ! is_null($request->get('name'))) {
+                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                    return Str::contains($row['name'], $request->get('name')) ? true : false;
+                });
+            }
+
+            if ($request->has('email') && ! is_null($request->get('email')) ) {
+                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                    return Str::contains($row['email'], $request->get('email')) ? true : false;
+                });
+            }
+        })
+        ->make(true);
     }
 
     /**

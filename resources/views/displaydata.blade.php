@@ -10,6 +10,28 @@
       <body>
          <div class="container">
                <h2>Laravel DataTables Tutorial Example</h2>
+
+               <div class="panel panel-default">
+                     <div class="panel-heading">
+                         <h3 class="panel-title">Custom Filter [Case Sensitive]</h3>
+                     </div>
+                     <div class="panel-body">
+                         <form method="POST" id="search-form" class="form-inline" role="form">
+                 
+                             <div class="form-group">
+                                 <label for="name">Name</label>
+                                 <input type="text" class="form-control" name="name" id="name" placeholder="search name">
+                             </div>
+                             <div class="form-group">
+                                 <label for="email">Email</label>
+                                 <input type="text" class="form-control" name="email" id="email" placeholder="search email">
+                             </div>
+                 
+                             <button type="submit" class="btn btn-primary">Search</button>
+                         </form>
+                     </div>
+                 </div>
+
             <table class="table table-bordered" id="table">
                <thead>
                   <tr>
@@ -22,15 +44,30 @@
          </div>
        <script>
          $(function() {
-               $('#table').DataTable({
+            var oTable = $('#table').DataTable({
+               dom: "<'row'<'col-xs-12'<'col-xs-6'l><'col-xs-6'p>>r>"+
+            "<'row'<'col-xs-12't>>"+
+            "<'row'<'col-xs-12'<'col-xs-6'i><'col-xs-6'p>>>",
                processing: true,
                serverSide: true,
-               ajax: '{{ url('index') }}',
+               //ajax: '{{ url('index') }}',
+               ajax: {
+                  url: '{{ url('index') }}',
+                  data: function (d) {
+                     d.name = $('input[name=name]').val();
+                     d.email = $('input[name=email]').val();
+                  }
+            },
                columns: [
                         { data: 'id', name: 'id' },
                         { data: 'name', name: 'name' },
                         { data: 'email', name: 'email' }
                      ]
+            });
+
+            $('#search-form').on('submit', function(e) {
+               oTable.draw();
+               e.preventDefault();
             });
          });
          </script>
